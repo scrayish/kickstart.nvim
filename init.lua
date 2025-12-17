@@ -169,6 +169,9 @@ vim.o.confirm = true
 -- Line to not reach over when writing code (character limit)
 vim.o.colorcolumn = '120'
 
+-- Line to not reach over when writing code (character limit)
+vim.opt.colorcolumn = '120'
+
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
 
@@ -371,8 +374,8 @@ require('lazy').setup({
           F9 = '<F9>',
           F10 = '<F10>',
           F11 = '<F11>',
-          F12 = '<F12>',
-        },
+        F12 = '<F12>',
+      },
       },
 
       -- Document existing key chains
@@ -382,6 +385,27 @@ require('lazy').setup({
         { '<leader>h', group = 'Git [H]unk', mode = { 'n', 'v' } },
       },
     },
+    config = function() -- This is the function that runs, AFTER loading
+      -- Document existing key chains
+      local wk = require 'which-key'
+      wk.add {
+        { '<leader>c', group = '[C]ode' },
+        { '<leader>c_', hidden = true },
+        { '<leader>d', group = '[D]ocument' },
+        { '<leader>d_', hidden = true },
+        { '<leader>r', group = '[R]ename' },
+        { '<leader>r_', hidden = true },
+        { '<leader>s', group = '[S]earch' },
+        { '<leader>s_', hidden = true },
+        { '<leader>w', group = '[W]orkspace' },
+        { '<leader>w_', hidden = true },
+        { '<leader>t', group = '[T]oggle' },
+        { '<leader>t_', hidden = true },
+        { '<leader>h', group = 'Git [H]unk' },
+        { '<leader>h_', hidden = true },
+        { '<leader>h', group = 'Git [H]unk', mode = 'v' },
+      }
+    end,
   },
 
   -- NOTE: Plugins can specify dependencies.
@@ -1033,6 +1057,7 @@ require('lazy').setup({
   -- Or use telescope!
   -- In normal mode type `<space>sh` then write `lazy.nvim-plugin`
   -- you can continue same window with `<space>sr` which resumes last telescope search
+  -- For additional information, see `:help lazy.nvim-lazy.nvim-structuring-your-plugins`
   { import = 'custom.plugins' },
 }, {
   ui = {
